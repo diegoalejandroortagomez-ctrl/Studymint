@@ -4,8 +4,139 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StudyMind - Organización Académica Inteligente</title>
+    <link rel="stylesheet" type="text/css" href="diseñostudy.css">
+    <style>
+        /* Estilos para la sección de precios */
+        .pricing {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 10px;
+            padding: 40px 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pricing-card.popular {
+            border: 2px solid #4a6cf7;
+            transform: scale(1.05);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #4a6cf7;
+            color: white;
+            padding: 5px 15px;
+            font-size: 12px;
+            font-weight: bold;
+            border-bottom-left-radius: 10px;
+        }
+        
+        .pricing-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .price {
+            font-size: 48px;
+            font-weight: bold;
+            color: #4a6cf7;
+            margin: 20px 0;
+        }
+        
+        .price span {
+            font-size: 16px;
+            color: #777;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+            text-align: left;
+        }
+        
+        .pricing-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .pricing-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4a6cf7;
+            font-weight: bold;
+        }
+        
+        .pricing-features li.disabled {
+            color: #aaa;
+        }
+        
+        .pricing-features li.disabled:before {
+            content: "✗";
+            color: #ccc;
+        }
+        
+        .pricing-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #4a6cf7;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s ease;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .pricing-btn:hover {
+            background: #3a5ce5;
+        }
+        
+        .pricing-btn.secondary {
+            background: transparent;
+            color: #4a6cf7;
+            border: 2px solid #4a6cf7;
+        }
+        
+        .pricing-btn.secondary:hover {
+            background: #4a6cf7;
+            color: white;
+        }
+        
+        .pricing-note {
+            text-align: center;
+            margin-top: 40px;
+            color: #777;
+            font-size: 14px;
+        }
+    </style>
 </head>
-   <link rel="stylesheet" type="text/css" href="diseñostudy.css">
 <body>
     <!-- Header -->
     <header>
@@ -72,6 +203,89 @@
                     <h3>Reportes para Docentes</h3>
                     <p>Genera reportes en PDF y CSV para evaluar el progreso individual y grupal de tus estudiantes.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="precios">
+        <div class="container">
+            <div class="section-title">
+                <h2>Planes y Precios</h2>
+                <p>Elige el plan que mejor se adapte a tus necesidades académicas</p>
+            </div>
+            <div class="pricing-grid">
+                <!-- Plan Básico -->
+                <div class="pricing-card">
+                    <h3>Básico</h3>
+                    <div class="price">$0<span>/mes</span></div>
+                    <p>Perfecto para estudiantes individuales</p>
+                    <ul class="pricing-features">
+                        <li>Hasta 5 materias</li>
+                        <li>Gestión de tareas básica</li>
+                        <li>Calendario académico</li>
+                        <li>Recordatorios por email</li>
+                        <li class="disabled">Proyectos colaborativos</li>
+                        <li class="disabled">Reportes avanzados</li>
+                        <li class="disabled">Soporte prioritario</li>
+                    </ul>
+                    <a href="#" class="pricing-btn secondary">Comenzar Gratis</a>
+                </div>
+                
+                <!-- Plan Estándar -->
+                <div class="pricing-card popular">
+                    <div class="popular-badge">MÁS POPULAR</div>
+                    <h3>Estándar</h3>
+                    <div class="price">$99<span>/mes</span></div>
+                    <p>Ideal para estudiantes avanzados</p>
+                    <ul class="pricing-features">
+                        <li>Hasta 15 materias</li>
+                        <li>Gestión avanzada de tareas</li>
+                        <li>Calendario con sincronización</li>
+                        <li>Recordatorios por email y app</li>
+                        <li>Hasta 3 proyectos colaborativos</li>
+                        <li>Reportes básicos</li>
+                        <li class="disabled">Soporte prioritario</li>
+                    </ul>
+                    <a href="#" class="pricing-btn">Elegir Plan</a>
+                </div>
+                
+                <!-- Plan Premium -->
+                <div class="pricing-card">
+                    <h3>Premium</h3>
+                    <div class="price">$199<span>/mes</span></div>
+                    <p>Para estudiantes y docentes exigentes</p>
+                    <ul class="pricing-features">
+                        <li>Materias ilimitadas</li>
+                        <li>Gestión avanzada de tareas</li>
+                        <li>Calendario con sincronización</li>
+                        <li>Recordatorios inteligentes</li>
+                        <li>Proyectos colaborativos ilimitados</li>
+                        <li>Reportes avanzados en PDF/CSV</li>
+                        <li>Soporte prioritario 24/7</li>
+                    </ul>
+                    <a href="#" class="pricing-btn">Elegir Plan</a>
+                </div>
+                
+                <!-- Plan Institucional -->
+                <div class="pricing-card">
+                    <h3>Institucional</h3>
+                    <div class="price">Personalizado</div>
+                    <p>Para instituciones educativas</p>
+                    <ul class="pricing-features">
+                        <li>Licencias para toda la institución</li>
+                        <li>Panel de administración</li>
+                        <li>Integración con sistemas existentes</li>
+                        <li>Reportes institucionales</li>
+                        <li>Capacitación personalizada</li>
+                        <li>Soporte dedicado</li>
+                        <li>Personalización de marca</li>
+                    </ul>
+                    <a href="#contacto" class="pricing-btn secondary">Contactar Ventas</a>
+                </div>
+            </div>
+            <div class="pricing-note">
+                <p>Todos los planes incluyen acceso web y móvil. Precios en MXN. Facturación disponible.</p>
             </div>
         </div>
     </section>
@@ -183,7 +397,6 @@
                         <li>México</li>
                     </ul>
                 </div>
-            </div>
             </div>
         </div>
     </footer>
