@@ -28,6 +28,7 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
         
         .pricing-card:hover {
@@ -112,6 +113,9 @@
             transition: background 0.3s ease;
             width: 100%;
             text-align: center;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
         }
         
         .pricing-btn:hover {
@@ -134,6 +138,207 @@
             margin-top: 40px;
             color: #777;
             font-size: 14px;
+        }
+        
+        /* Estilos para el modal de compra */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal {
+            background: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #777;
+        }
+        
+        .modal-header {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .modal-header h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .plan-summary {
+            background: #f5f7ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .plan-summary h3 {
+            margin: 0 0 5px 0;
+            color: #4a6cf7;
+        }
+        
+        .plan-summary .price {
+            font-size: 24px;
+            margin: 5px 0;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .payment-methods {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .payment-method {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-method:hover {
+            border-color: #4a6cf7;
+        }
+        
+        .payment-method.selected {
+            border-color: #4a6cf7;
+            background-color: #f5f7ff;
+        }
+        
+        .payment-icon {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        
+        .terms {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 20px;
+        }
+        
+        .terms a {
+            color: #4a6cf7;
+            text-decoration: none;
+        }
+        
+        .submit-btn {
+            background: #4a6cf7;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background: #3a5ce5;
+        }
+        
+        .success-message {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .success-icon {
+            font-size: 60px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        
+        .success-message h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .success-message p {
+            color: #777;
+            margin-bottom: 20px;
+        }
+        
+        .continue-btn {
+            background: #4a6cf7;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .continue-btn:hover {
+            background: #3a5ce5;
         }
     </style>
 </head>
@@ -216,7 +421,7 @@
             </div>
             <div class="pricing-grid">
                 <!-- Plan Básico -->
-                <div class="pricing-card">
+                <div class="pricing-card" data-plan="basico" data-price="0">
                     <h3>Básico</h3>
                     <div class="price">$0<span>/mes</span></div>
                     <p>Perfecto para estudiantes individuales</p>
@@ -229,11 +434,11 @@
                         <li class="disabled">Reportes avanzados</li>
                         <li class="disabled">Soporte prioritario</li>
                     </ul>
-                    <a href="#" class="pricing-btn secondary">Comenzar Gratis</a>
+                    <button class="pricing-btn secondary">Comenzar Gratis</button>
                 </div>
                 
                 <!-- Plan Estándar -->
-                <div class="pricing-card popular">
+                <div class="pricing-card popular" data-plan="estandar" data-price="99">
                     <div class="popular-badge">MÁS POPULAR</div>
                     <h3>Estándar</h3>
                     <div class="price">$99<span>/mes</span></div>
@@ -247,11 +452,11 @@
                         <li>Reportes básicos</li>
                         <li class="disabled">Soporte prioritario</li>
                     </ul>
-                    <a href="#" class="pricing-btn">Elegir Plan</a>
+                    <button class="pricing-btn">Elegir Plan</button>
                 </div>
                 
                 <!-- Plan Premium -->
-                <div class="pricing-card">
+                <div class="pricing-card" data-plan="premium" data-price="199">
                     <h3>Premium</h3>
                     <div class="price">$199<span>/mes</span></div>
                     <p>Para estudiantes y docentes exigentes</p>
@@ -264,11 +469,11 @@
                         <li>Reportes avanzados en PDF/CSV</li>
                         <li>Soporte prioritario 24/7</li>
                     </ul>
-                    <a href="#" class="pricing-btn">Elegir Plan</a>
+                    <button class="pricing-btn">Elegir Plan</button>
                 </div>
                 
                 <!-- Plan Institucional -->
-                <div class="pricing-card">
+                <div class="pricing-card" data-plan="institucional" data-price="personalizado">
                     <h3>Institucional</h3>
                     <div class="price">Personalizado</div>
                     <p>Para instituciones educativas</p>
@@ -281,7 +486,7 @@
                         <li>Soporte dedicado</li>
                         <li>Personalización de marca</li>
                     </ul>
-                    <a href="#contacto" class="pricing-btn secondary">Contactar Ventas</a>
+                    <button class="pricing-btn secondary">Contactar Ventas</button>
                 </div>
             </div>
             <div class="pricing-note">
@@ -289,6 +494,83 @@
             </div>
         </div>
     </section>
+
+    <!-- Modal de Compra -->
+    <div class="modal-overlay" id="purchaseModal">
+        <div class="modal">
+            <button class="close-modal" id="closeModal">&times;</button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Completa tu Registro</h2>
+                    <p>Estás a un paso de mejorar tu organización académica</p>
+                </div>
+                
+                <div class="plan-summary">
+                    <h3 id="selectedPlanName">Plan Básico</h3>
+                    <div class="price" id="selectedPlanPrice">$0<span>/mes</span></div>
+                </div>
+                
+                <form id="purchaseForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">Nombre</label>
+                            <input type="text" id="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Apellido</label>
+                            <input type="text" id="lastName" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="userType">Tipo de Usuario</label>
+                        <select id="userType" required>
+                            <option value="">Selecciona una opción</option>
+                            <option value="estudiante">Estudiante</option>
+                            <option value="docente">Docente</option>
+                            <option value="institucion">Institución</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" id="paymentSection">
+                        <label>Método de Pago</label>
+                        <div class="payment-methods">
+                            <div class="payment-method" data-method="tarjeta">
+                                <div class="payment-icon">💳</div>
+                                <div>Tarjeta</div>
+                            </div>
+                            <div class="payment-method" data-method="paypal">
+                                <div class="payment-icon">🔵</div>
+                                <div>PayPal</div>
+                            </div>
+                            <div class="payment-method" data-method="transferencia">
+                                <div class="payment-icon">🏦</div>
+                                <div>Transferencia</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="terms">
+                        Al continuar, aceptas nuestros <a href="#">Términos de Servicio</a> y <a href="#">Política de Privacidad</a>.
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Completar Registro</button>
+                </form>
+                
+                <div class="success-message" id="successMessage" style="display: none;">
+                    <div class="success-icon">✓</div>
+                    <h2>¡Registro Completado!</h2>
+                    <p>Tu cuenta ha sido creada exitosamente. Hemos enviado un correo de confirmación a tu dirección de email.</p>
+                    <button class="continue-btn" id="continueBtn">Continuar a StudyMind</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Dashboard Preview -->
     <section class="dashboard-preview">
@@ -400,5 +682,255 @@
             </div>
         </div>
     </footer>
+<!-- Sección de Objetivo -->
+<section class="mission">
+    <div class="container">
+        <div class="mission-content">
+            <div class="mission-text">
+                <h2>Nuestro Compromiso con tu Éxito Académico</h2>
+                <div class="mission-statement">
+                    <p>
+                        En StudyMind, hemos identificado una necesidad fundamental en la comunidad estudiantil: 
+                        <strong>la falta de organización efectiva</strong> que afecta el rendimiento académico y 
+                        aumenta los niveles de estrés.
+                    </p>
+                    <p>
+                        Nuestra aplicación nace para transformar esta realidad, ofreciendo una solución integral 
+                        que <strong>centraliza tareas, proyectos y recordatorios</strong> en una sola plataforma 
+                        intuitiva y accesible.
+                    </p>
+                </div>
+</section>
+
+<style>
+    .mission {
+        padding: 80px 0;
+        background: linear-gradient(135deg, #f5f7ff 0%, #e8edff 100%);
+    }
+    
+    .mission-content {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    
+    .mission-text h2 {
+        text-align: center;
+        font-size: 2.5rem;
+        color: #333;
+        margin-bottom: 30px;
+    }
+    
+    .mission-statement {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        margin-bottom: 50px;
+    }
+    
+    .mission-statement p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        color: #555;
+    }
+    
+    .mission-statement strong {
+        color: #4a6cf7;
+    }
+    
+    .goals-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-bottom: 50px;
+    }
+    
+    .goal-item {
+        text-align: center;
+        padding: 30px 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        transition: transform 0.3s ease;
+    }
+    
+    .goal-item:hover {
+        transform: translateY(-5px);
+    }
+    
+    .goal-icon {
+        font-size: 3rem;
+        margin-bottom: 15px;
+    }
+    
+    .goal-item h3 {
+        color: #333;
+        margin-bottom: 15px;
+        font-size: 1.3rem;
+    }
+    
+    .goal-item p {
+        color: #666;
+        line-height: 1.5;
+    }
+    
+    .impact-stats {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 30px;
+        background: white;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+    
+    .stat {
+        text-align: center;
+        flex: 1;
+        min-width: 150px;
+    }
+    
+    .stat-number {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #4a6cf7;
+        margin-bottom: 10px;
+    }
+    
+    .stat-label {
+        color: #666;
+        font-size: 0.9rem;
+    }
+    
+    @media (max-width: 768px) {
+        .mission-text h2 {
+            font-size: 2rem;
+        }
+        
+        .impact-stats {
+            flex-direction: column;
+            text-align: center;
+        }
+    }
+</style>
+    <script>
+        // Variables globales
+        let selectedPlan = '';
+        let selectedPaymentMethod = '';
+        
+        // Elementos del DOM
+        const pricingCards = document.querySelectorAll('.pricing-card');
+        const modal = document.getElementById('purchaseModal');
+        const closeModalBtn = document.getElementById('closeModal');
+        const purchaseForm = document.getElementById('purchaseForm');
+        const successMessage = document.getElementById('successMessage');
+        const continueBtn = document.getElementById('continueBtn');
+        const selectedPlanName = document.getElementById('selectedPlanName');
+        const selectedPlanPrice = document.getElementById('selectedPlanPrice');
+        const paymentMethods = document.querySelectorAll('.payment-method');
+        const paymentSection = document.getElementById('paymentSection');
+        
+        // Abrir modal al hacer clic en un plan
+        pricingCards.forEach(card => {
+            card.addEventListener('click', function(e) {
+                // No abrir modal si se hace clic en el botón de contacto
+                if (e.target.classList.contains('secondary') && this.dataset.plan === 'institucional') {
+                    return;
+                }
+                
+                selectedPlan = this.dataset.plan;
+                const planName = this.querySelector('h3').textContent;
+                const planPrice = this.querySelector('.price').innerHTML;
+                
+                // Actualizar información del plan en el modal
+                selectedPlanName.textContent = planName;
+                selectedPlanPrice.innerHTML = planPrice;
+                
+                // Mostrar/ocultar sección de pago según el plan
+                if (selectedPlan === 'basico') {
+                    paymentSection.style.display = 'none';
+                } else {
+                    paymentSection.style.display = 'block';
+                }
+                
+                // Mostrar modal
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        // Cerrar modal
+        closeModalBtn.addEventListener('click', closeModal);
+        
+        // Cerrar modal al hacer clic fuera del contenido
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+        
+        // Seleccionar método de pago
+        paymentMethods.forEach(method => {
+            method.addEventListener('click', function() {
+                paymentMethods.forEach(m => m.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedPaymentMethod = this.dataset.method;
+            });
+        });
+        
+        // Enviar formulario
+        purchaseForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validar método de pago para planes de pago
+            if (selectedPlan !== 'basico' && !selectedPaymentMethod) {
+                alert('Por favor, selecciona un método de pago');
+                return;
+            }
+            
+            // Simular procesamiento de pago
+            const submitBtn = this.querySelector('.submit-btn');
+            submitBtn.textContent = 'Procesando...';
+            submitBtn.disabled = true;
+            
+            // Simular tiempo de procesamiento
+            setTimeout(() => {
+                // Mostrar mensaje de éxito
+                purchaseForm.style.display = 'none';
+                successMessage.style.display = 'block';
+            }, 2000);
+        });
+        
+        // Continuar después del registro exitoso
+        continueBtn.addEventListener('click', function() {
+            closeModal();
+            // Aquí podrías redirigir al usuario a su dashboard
+            alert('¡Bienvenido a StudyMind! Serás redirigido a tu panel de control.');
+        });
+        
+        // Función para cerrar modal
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            
+            // Restablecer formulario
+            setTimeout(() => {
+                purchaseForm.reset();
+                purchaseForm.style.display = 'block';
+                successMessage.style.display = 'none';
+                
+                const submitBtn = purchaseForm.querySelector('.submit-btn');
+                submitBtn.textContent = 'Completar Registro';
+                submitBtn.disabled = false;
+                
+                // Restablecer selección de método de pago
+                paymentMethods.forEach(m => m.classList.remove('selected'));
+                selectedPaymentMethod = '';
+            }, 300);
+        }
+
+    </script>
 </body>
 </html>
